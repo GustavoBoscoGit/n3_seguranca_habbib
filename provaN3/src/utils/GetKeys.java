@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Calculate a private key from two prime numbers and a public exponent.
  *
- * @author Hal Perkins
+ * @author Hal Perkins 
  * @version 10/30/01
  */
 public class GetKeys {
@@ -45,7 +45,7 @@ public class GetKeys {
         BigInteger big1 = new BigInteger("1");
         // Set up input from console
         BufferedReader in = new BufferedReader(
-                                new InputStreamReader(System.in));
+                new InputStreamReader(System.in));
 
         System.out.println();
         System.out.println("GetKeys");
@@ -69,22 +69,25 @@ public class GetKeys {
 
         // keep trying until we get a good key
         goodkey = false;
+        int estr = 100;
         while (!goodkey) {
             System.out.println();
-            System.out.println("Enter public exponent (key): ");
-            String estr = in.readLine();
-            E = new BigInteger(estr);
+//            System.out.println("Enter public exponent (key): ");
+//            String estr = in.readLine();
+            E = new BigInteger(String.valueOf(estr));
             D = getPrivateExp(
-                            (P.subtract(big1)).multiply(Q.subtract(big1)), E);
+                    (P.subtract(big1)).multiply(Q.subtract(big1)), E);
             if (!goodkey) {
-                System.out.println("No private exponent (key) is associated");
-                System.out.println("with that public key.  Please try again.");
+//                System.out.println("No private exponent (key) is associated");
+//                System.out.println("with that public key.  Please try again.");
+                estr++;
             }
         }
 
         System.out.println();
-        System.out.println("The modulus and private key are as follows.");
+        System.out.println("The modulus, public and private key are as follows.");
         System.out.println("Modulus    : " + P.multiply(Q));
         System.out.println("Private Exp: " + D);
+        System.out.println("Public Exp: " + E);
     }
 }
