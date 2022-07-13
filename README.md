@@ -7,14 +7,11 @@ Dupla: Frederico Bernardes Wust Stein e Gustavo Bosco.
 <p>Organizamos nosso código criando arquivos com nomes de Encriptar e Descriptografar, sendo ligado a um main.
 Assim, desenvolvendo métodos para realizarmos a função de encriptografar e descriptografar dados. Os problemas encontrados foram na etapa
 de encriptografar e descriptografar, dificuldades com a criação da lógica na transição dos dados a serem encriptografados. Utilizamos a linguagem 
-JAVA por ser uma linguagem que temos mais convívio. Porém, depois de tentarmos de uma forma menos simples, utilizamos Cipher.getInstance("RSA")
-para encriptografar e descriptografar os dados com êxito.</p>
+JAVA por ser uma linguagem que temos mais convívio.</p>
 
 # Teste
 
-<p>Testamos nosso código executando nosso main para realizar a encriptografia dos dados e a descriptografia. Até então não foram encontrados bugs
-mas sim, nenhum êxito na encriptografia dos dados. Como já dito no planejamento e operação, utilizando o Cipher.getInstance("RSA") foi possível
-encriptografarmos e descriptografarmos os dados. Sendo assim, não houve mais problemas.</p>
+<p>Testamos nosso código executando nosso main para realizar a encriptografia dos dados e a descriptografia. Até então não foram encontrados bugs. Conseguimos criar com sucesso apenas a criptografia do arquivo de texto, porém não conseguimos realizar a descriptografia com êxito. Porém, utilizando o Cipher.getInstance("RSA") foi possível encriptografarmos e descriptografarmos os dados, mas a biblioteca não está sendo mais utilizada. Sendo assim, estamos apenas utilizando a criptografia.</p>
 
 
 # Avalie o projeto
