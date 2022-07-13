@@ -9,9 +9,7 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 
 
 public class Encripta {
@@ -24,23 +22,17 @@ public class Encripta {
         String codedText = Base64.getEncoder().encodeToString(originalChunk.toString().getBytes());
         Integer chunkSize = TextChunk.blockSize(n);
 
-        System.out.println(n+"\n");
-        System.out.println(originalChunk.bigIntValue());
-        System.out.println(chunkSize);
-
         BigInteger e = getPublicKey();
         BigInteger module =getKeyModule();
 
-        for (String chunk: codedText.split(String.valueOf(n), chunkSize)){
-            BigInteger encodedChunk = n.modPow(e, module);
+        BigInteger key = getPrivateKey();
 
-            //System.out.println("the encoded chunk is:"+encodedChunk);
-        }
+        //for (String chunk: codedText.split(String.valueOf(n), chunkSize)){}
 
+        BigInteger encodedChunk = n.modPow(e, module);
 
-        //List<String> partes = new ArrayList<String>();
-        //for (int i = 0; i < codedText.length(); i += chunkSize) partes.add(codedText.substring(i, Math.min(i + chunkSize,codedText.length())));
-        //for (int i = 0; i < partes.size(); i++) System.out.println(partes.get(i)+"\n");
+        System.out.println(encodedChunk);
+
     }
 
     public static String getSourceText() throws IOException {
@@ -59,11 +51,11 @@ public class Encripta {
         return new BigInteger(publicKey);
     }
 
-    public static String getPrivateKey() throws IOException {
+    public static BigInteger getPrivateKey() throws IOException {
         Path path = Paths.get("src/resources/private.txt");
         String privateKey = Files.readAllLines(path).get(1);
 
-        return privateKey;
+        return new BigInteger(privateKey);
     }
 
     public static BigInteger getKeyModule() throws IOException {
