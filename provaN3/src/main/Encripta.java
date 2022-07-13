@@ -9,30 +9,35 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 
 
 public class Encripta {
 
     public static void main(String[] args) throws IOException {
-        TextChunk originalChunk = new TextChunk(getSourceText());
-        BigInteger n = originalChunk.bigIntValue();
-        //System.out.println("biginteger value of: " + originalChunk + "\n" + " is: " + n);
 
+        TextChunk originalChunk = new TextChunk(getSourceText());
         String codedText = Base64.getEncoder().encodeToString(originalChunk.toString().getBytes());
-        Integer chunkSize = TextChunk.blockSize(n);
+
+        BigInteger n = originalChunk.bigIntValue();
+
+        Integer chunkSize = TextChunk.blockSize(getKeyModule());
+
 
         BigInteger e = getPublicKey();
         BigInteger module =getKeyModule();
-
         BigInteger key = getPrivateKey();
 
-        //for (String chunk: codedText.split(String.valueOf(n), chunkSize)){}
 
         BigInteger encodedChunk = n.modPow(e, module);
+        String chunkOriginal = String.valueOf(encodedChunk.modPow(key, module));
 
-        System.out.println(encodedChunk);
-
+        for (var chunk: codedText.split("7")){
+            System.out.println(chunk);
+        }
     }
 
     public static String getSourceText() throws IOException {
