@@ -23,15 +23,10 @@ public class Encripta {
 
         BigInteger e = getPublicKey();
         BigInteger module =getKeyModule();
-        BigInteger key = getPrivateKey();
-
 
         String[] chunks = codedText.split("(?<=\\G.{"+chunkSize+"})");
 
-        Path path = Paths.get("textoCriptografado.txt");
-
-
-        FileWriter arq = new FileWriter("D:\\Projetos\\n3_seguranca_habbib\\provaN3\\src\\main\\textoCriptografado.txt");
+        FileWriter arq = new FileWriter("D:\\Projetos\\n3_seguranca_habbib\\provaN3\\src\\resources\\textoCriptografado.txt");
         PrintWriter gravarArq = new PrintWriter(arq);
 
         for (String chunk: chunks){
@@ -58,13 +53,6 @@ public class Encripta {
         String publicKey = Files.readAllLines(path).get(1);
 
         return new BigInteger(publicKey);
-    }
-
-    public static BigInteger getPrivateKey() throws IOException {
-        Path path = Paths.get("src/resources/private.txt");
-        String privateKey = Files.readAllLines(path).get(1);
-
-        return new BigInteger(privateKey);
     }
 
     public static BigInteger getKeyModule() throws IOException {
