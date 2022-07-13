@@ -17,8 +17,6 @@ public class Encripta {
         TextChunk originalChunk = new TextChunk(getSourceText());
         String codedText = Base64.getEncoder().encodeToString(originalChunk.toString().getBytes());
 
-        BigInteger n = originalChunk.bigIntValue();
-
         String chunkSize = String.valueOf(TextChunk.blockSize(getKeyModule()));
 
         BigInteger e = getPublicKey();
