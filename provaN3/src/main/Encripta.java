@@ -38,9 +38,14 @@ public class Encripta {
         //for (int i =0; i <= codedText.length(); i++){System.out.println(Arrays.toString(codedText.split(chunkSize)));}
 
 
+
+
         while(codedText.length() > Integer.valueOf(chunkSize)) {
             System.out.println(codedText.substring(0, Integer.valueOf(chunkSize)));
             codedText = codedText.substring(Integer.valueOf(chunkSize));
+            //BigInteger test = new BigInteger(codedText.substring(Integer.valueOf(chunkSize)));
+            //BigInteger encondedtest = test.modPow(e, module);
+            //System.out.println(encondedtest);
         }
 
     }
