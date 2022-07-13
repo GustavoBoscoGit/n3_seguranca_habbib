@@ -2,9 +2,7 @@ package main;
 
 import utils.TextChunk;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,8 +10,14 @@ import java.nio.file.Paths;
 
 public class Decripta {
     public static void main(String[] args) throws IOException {
-        TextChunk originalChunk = new TextChunk(getEncriptedText());
-        System.out.println(originalChunk);
+        TextChunk encriptedText = new TextChunk(getEncriptedText());
+        BigInteger key = getPrivateKey();
+        BigInteger module =getKeyModule();
+
+        String originalEncondedText = "";
+
+
+
     }
     public static String getEncriptedText() throws IOException {
         String file ="src/resources/textoCriptografado.txt";
@@ -35,5 +39,25 @@ public class Decripta {
         String module = Files.readAllLines(path).get(0);
 
         return new BigInteger(module);
+    }
+
+    public static long countLineNumberReader(String fileName) {
+
+        File file = new File(fileName);
+
+        long lines = 0;
+
+        try (LineNumberReader lnr = new LineNumberReader(new FileReader(file))) {
+
+            while (lnr.readLine() != null) ;
+
+            lines = lnr.getLineNumber();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return lines;
+
     }
 }
