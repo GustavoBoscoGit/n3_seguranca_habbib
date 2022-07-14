@@ -19,7 +19,6 @@ public class Decripta {
         String sourceString = readSourceFile("D:\\Projetos\\n3_seguranca_habbib\\provaN3\\src\\resources\\textoCriptografado.txt");
 
         Base64.Encoder encoder = Base64.getEncoder();
-        Base64.Decoder decoder = Base64.getDecoder();
 
         String[] chunks = sourceString.split("\n");
         for (String chunk : chunks){
@@ -31,10 +30,7 @@ public class Decripta {
             originalEncondedText += base64EncodedBigIntegerBytes;
         }
         System.out.println(originalEncondedText);
-        String decryptedText = String.valueOf(Base64.getDecoder().decode(originalEncondedText));
-        System.out.println(decryptedText);
-
-
+        // decode a String
 
 
 
