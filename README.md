@@ -11,7 +11,7 @@ JAVA por ser uma linguagem que temos mais convívio.</p>
 
 # Teste
 
-<p>Testamos nosso código executando nosso main para realizar a encriptografia dos dados e a descriptografia. Até então não foram encontrados bugs. Conseguimos criar com sucesso apenas a criptografia do arquivo de texto, porém não conseguimos realizar a descriptografia com êxito. Porém, utilizando o Cipher.getInstance("RSA") foi possível encriptografarmos e descriptografarmos os dados, mas a biblioteca não está sendo mais utilizada. Sendo assim, estamos apenas utilizando a criptografia.</p>
+<p>Testamos nosso código executando nosso main para realizar a encriptografia dos dados e a descriptografia. Até então não foram encontrados bugs. Conseguimos criar com sucesso apenas a criptografia do arquivo de texto, porém não conseguimos realizar a descriptografia completa com êxito. Porém ao utilizar o Cipher.getInstance("RSA") foi possível encriptografarmos e descriptografarmos os dados, mas a biblioteca não está sendo mais utilizada. Sendo assim, estamos apenas a criptografia está funcionando 100%, já a descriptografia 70%.</p>
 
 
 # Avalie o projeto
