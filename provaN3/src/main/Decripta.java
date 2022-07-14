@@ -7,25 +7,38 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 
 public class Decripta {
     public static void main(String[] args) throws IOException {
-        TextChunk encriptedText = new TextChunk(getEncriptedText());
         BigInteger key = getPrivateKey();
         BigInteger module =getKeyModule();
 
         String originalEncondedText = "";
 
+        String sourceString = readSourceFile("D:\\Projetos\\n3_seguranca_habbib\\provaN3\\src\\resources\\textoCriptografado.txt");
+
+        Base64.Encoder encoder = Base64.getEncoder();
+        Base64.Decoder decoder = Base64.getDecoder();
+
+        String[] chunks = sourceString.split("\n");
+        for (String chunk : chunks){
+            TextChunk chunkToBigInt = new TextChunk(chunk);
+            BigInteger encodedChunk = chunkToBigInt.bigIntValue();
+            BigInteger originalChunk = encodedChunk.modPow(key, module);
+            byte[] bigIntegerBytes = originalChunk.toByteArray();
+            String base64EncodedBigIntegerBytes = encoder.encodeToString(bigIntegerBytes);
+            originalEncondedText += base64EncodedBigIntegerBytes;
+        }
+        System.out.println(originalEncondedText);
+        String decryptedText = String.valueOf(Base64.getDecoder().decode(originalEncondedText));
+        System.out.println(decryptedText);
 
 
-    }
-    public static String getEncriptedText() throws IOException {
-        String file ="src/resources/textoCriptografado.txt";
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String textoObtido = reader.readLine();
-        reader.close();
 
-        return textoObtido;
+
+
+
     }
     public static BigInteger getPrivateKey() throws IOException {
         Path path = Paths.get("src/resources/private.txt");
@@ -41,23 +54,25 @@ public class Decripta {
         return new BigInteger(module);
     }
 
-    public static long countLineNumberReader(String fileName) {
+    private static String readFromInputStream(InputStream inputStream)
+            throws IOException {
+        return getString(inputStream);
+    }
 
-        File file = new File(fileName);
+    private static String readSourceFile(String fileName) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(fileName);
+        return readFromInputStream(fileInputStream);
+    }
 
-        long lines = 0;
-
-        try (LineNumberReader lnr = new LineNumberReader(new FileReader(file))) {
-
-            while (lnr.readLine() != null) ;
-
-            lines = lnr.getLineNumber();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static String getString(InputStream inputStream) throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+                     = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
         }
-
-        return lines;
-
+        return resultStringBuilder.toString();
     }
 }
